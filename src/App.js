@@ -1,16 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+var express = require("express");
+var app = express();
+var bodyParser = require("body-parser");
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello from V2</h1>
-      </header>
-    </div>
-  );
-}
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({encoded:true}));
+app.set("view engine", "ejs");
 
-export default App;
+//HOME PAGE
+app.get("/", function(req,res){
+    res.render("index");
+})
+
+//START THE SERVER
+app.listen(3000, function() {
+    console.log("server listening on port 3000");
+})
